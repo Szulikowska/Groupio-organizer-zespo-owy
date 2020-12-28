@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:dc="clr-namespace:Projekt.Dictionary"
+             mc:Ignorable="d"
+             x:Class="Projekt.Views.LogInPage"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior = "Disabled"
+             BackgroundColor="White"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:vm="clr-namespace:Projekt.ViewModels">
+
+    <d:ContentPage.BindingContext>
+        <vm:LogInViewModel/>
+    </d:ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <!-- 0-->
+                <RowDefinition Height="6*"/>
+                <!-- 1-->
+                <RowDefinition Height="auto"/>
+                <!-- 2-->
+                <RowDefinition Height="auto"/>
+                <!-- 3-->
+                <RowDefinition Height="auto"/>
+                <!-- 4-->
+                <RowDefinition Height="auto"/>
+                <!-- 5-->
+                <RowDefinition Height="auto"/>
+                <!-- 6-->
+                <RowDefinition Height="auto"/>
+                <!-- 7-->
+                <RowDefinition Height="auto"/>
+                <!-- 8-->
+                <RowDefinition Height="auto"/>
+                <!-- 9-->
+                <RowDefinition Height="auto"/>
+                <!-- 10-->
+                <RowDefinition Height="auto"/>
+                <!-- 11-->
+                <RowDefinition Height="*"/>
+                <!-- 12-->
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.75*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.75*"/>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="groupio_logo.png"
+                   Aspect="AspectFit"
+                   VerticalOptions="Center"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="6"/>
+            <!-- wstawić logo-->
+            <Label Text="{x:Static dc:AppResources.Login}"
+                   Grid.Row="2"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="4" 
+                   HorizontalTextAlignment="Start"/>
+            <Frame IsClippedToBounds="true" 
+                   Padding="1" 
+                   BorderColor="Gray"
+                   CornerRadius="25"
+                   BackgroundColor="#D4BDD9"
+                   Grid.Row="3"
+                   Grid.Column="1" 
+                   Grid.ColumnSpan="4">
+                <Entry Text="{Binding Path=Login, Mode=OneWayToSource}"
+                       BackgroundColor="Transparent"
+                       Grid.Row="3"
+                       Grid.Column="1" 
+                       Grid.ColumnSpan="4"/>
+            </Frame>
+            <Label Text="{x:Static dc:AppResources.Password}" 
+                   Grid.Row="4" 
+                   Grid.Column="1" 
+                   Grid.ColumnSpan="3" 
+                   HorizontalTextAlignment="Start"/>
+            <Frame IsClippedToBounds="true" 
+                   Padding="1" 
+                   BorderColor="Gray"
+                   CornerRadius="25"
+                   BackgroundColor="#D4BDD9"
+                   Grid.Row="5"
+                   Grid.Column="1" 
+                   Grid.ColumnSpan="4">
+                <Entry Text="{Binding Path=Password, Mode=OneWayToSource}"
+                       IsPassword="True"
+                       BackgroundColor="Transparent"
+                       Grid.Row="5"
+                       Grid.Column="1" 
+                       Grid.ColumnSpan="4"/>
+            </Frame>
+            <Label Text="{x:Static dc:AppResources.ErrorLogInOrPassword}" 
+                   IsVisible="{Binding Path=AreCredentialsInvalid, Mode=TwoWay}"
+                   LineBreakMode="WordWrap"
+                   MaxLines="2"
+                   TextColor="Red"
+                   Grid.Row="6"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="4"/>
+            <CheckBox IsChecked="{Binding Path=Save, Mode=TwoWay}" 
+                      HorizontalOptions="End"
+                      Grid.Row="7" 
+                      Grid.Column="2"/>
+            <Label Text="{x:Static dc:AppResources.RememberMe}" 
+                   VerticalOptions="CenterAndExpand"
+                   Grid.Row="7"
+                   Grid.Column="3"
+                   Grid.ColumnSpan="2"/>
+            <Frame IsClippedToBounds="true" 
+                   Padding="1" 
+                   BorderColor="Gray"
+                   CornerRadius="25"
+                   BackgroundColor="#724F7B"
+                   Grid.Row="9"
+                   Grid.Column="2" 
+                   Grid.ColumnSpan="2">
+                <Button Text="{x:Static dc:AppResources.LogInButton}" 
+                    BackgroundColor="Transparent"
+                    Grid.Row="9" 
+                    Grid.Column="2" 
+                    Grid.ColumnSpan="2" 
+                    Command="{Binding LogInClicked}" />
+            </Frame>
+            <Label Text="{x:Static dc:AppResources.Don_tHaveAnAccount_}"
+                   IsVisible="true"
+                   TextColor="Gray"
+                   Grid.Column="3"
+                   Grid.ColumnSpan="3"
+                   Grid.Row="10"
+                   HorizontalTextAlignment="End"/>
+            <Button Text="{x:Static dc:AppResources.Register_}"
+                    TextColor="Gray"
+                    BackgroundColor="Transparent"
+                    BorderWidth="2"
+                    BorderColor="Gray"
+                    Grid.Column="3"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="11"
+                    HorizontalOptions="End"
+                    Clicked="Registration_Clicked"/>
+            <ActivityIndicator IsRunning="{Binding Path=IsLoading, Mode=OneWay}"
+                               IsVisible="{Binding Path=IsLoading, Mode=OneWay}"
+                               Color="#724F7B"
+                               Grid.Column="1"
+                               Grid.Row="1"
+                               Grid.ColumnSpan="6"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

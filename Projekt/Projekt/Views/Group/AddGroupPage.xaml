@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Shell.BackgroundColor="#724F7B"
+             xmlns:dc="clr-namespace:Projekt.Dictionary"
+             xmlns:vm="clr-namespace:Projekt.ViewModels"
+             x:Class="Projekt.Views.AddGroupPage">
+
+    <d:ContentPage.BindingContext>
+        <vm:AddGroupViewModel/>
+    </d:ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static dc:AppResources.CreateGroup}"
+                     Command="{Binding NewGroupClicked}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="9*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ScrollView BackgroundColor="#D4BDD9"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Text="Nazwa"
+                           Grid.Row="2"
+                           Grid.Column="1"/>
+                        <Frame  IsClippedToBounds="true" 
+                                Padding="1" 
+                                BorderColor="Gray"
+                                CornerRadius="25"
+                                BackgroundColor="White"
+                                Grid.Row="3"
+                                Grid.Column="1" 
+                               Grid.ColumnSpan="1">
+                            <Entry Text="{Binding Path=Name, Mode=OneWayToSource}"
+                                   BackgroundColor="Transparent"
+                                   Grid.Row="3"
+                                   Grid.Column="1" 
+                                   Grid.ColumnSpan="1"/>
+                        </Frame>
+                        <Label Text="Nazwa grupy już zajęta"
+                               IsVisible="{Binding NameError, Mode=OneWay}"
+                               TextColor="Red"
+                               Grid.Row="4"
+                               Grid.Column="1"
+                               Grid.ColumnSpan="1"/>
+                        <Label Text="Uczelnia/szkoła"
+                               Grid.Row="5"
+                               Grid.Column="1"
+                               Grid.ColumnSpan="1"/>
+                        <Frame IsClippedToBounds="true" 
+                               Padding="1" 
+                               BorderColor="Gray"
+                               CornerRadius="25"
+                               BackgroundColor="White"
+                               Grid.Row="6"
+                               Grid.Column="1" 
+                               Grid.ColumnSpan="1">
+                            <Entry Text="{Binding Path=School, Mode=OneWayToSource}"
+                                   BackgroundColor="Transparent"
+                                   Grid.Row="6"
+                                   Grid.Column="1" 
+                                   Grid.ColumnSpan="1"/>
+                        </Frame>
+                        <Label Text="Błędna nazwa uczelni/szkoły"
+                               IsVisible="{Binding SchoolError, Mode=OneWay}"
+                               TextColor="Red"
+                               Grid.Row="7"
+                               Grid.Column="1"
+                               Grid.ColumnSpan="1"/>
+                        <Label Text="Rocznik"
+                           Grid.Row="8"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="1"/>
+                        <Frame IsClippedToBounds="true" 
+                        Padding="1" 
+                        BorderColor="Gray"
+                        CornerRadius="25"
+                        BackgroundColor="White"
+                        Grid.Row="9"
+                        Grid.Column="1" >
+                            <Entry Text="{Binding Path=Year, Mode=OneWayToSource}"
+                            BackgroundColor="Transparent"
+                            Grid.Row="9"
+                            Grid.Column="1" />
+                        </Frame>
+                        <Label Text="Błędny rocznik"
+                           IsVisible="{Binding YearError, Mode=OneWay}"
+                           TextColor="Red"
+                           Grid.Row="10"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="1"/>
+                        <Label Text="Opis"
+                           Grid.Row="11"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="1"/>
+                        <Frame IsClippedToBounds="true" 
+                        Padding="1" 
+                        BorderColor="Gray"
+                        CornerRadius="25"
+                        BackgroundColor="White"
+                        Grid.Row="12"
+                        Grid.Column="1" >
+                            <Entry Text="{Binding Path=Description, Mode=OneWayToSource}"
+                            BackgroundColor="Transparent"
+                            Grid.Row="13"
+                            Grid.Column="1" />
+                        </Frame>
+                        <Label Text="Błędny rocznik"
+                           IsVisible="{Binding YearError, Mode=OneWay}"
+                           TextColor="Red"
+                           Grid.Row="14"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="1"/>
+                    </Grid>
+                    
+                </ScrollView>
+                <Frame IsClippedToBounds="true" 
+                               Padding="1" 
+                               BorderColor="Gray"
+                               CornerRadius="25"
+                               BackgroundColor="White"
+                               Grid.Row="4"
+                               Grid.Column="2" 
+                               Grid.ColumnSpan="1">
+                    <Button Text="Zatwierdź"
+                            BackgroundColor="#724F7B"
+                            Grid.Row="4"
+                            Grid.Column="2" 
+                            Grid.ColumnSpan="1"
+                            Command="{Binding NewGroupClicked}"/>
+                </Frame>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

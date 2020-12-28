@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Projekt.ViewModels"
+             mc:Ignorable="d"
+             x:Class="Projekt.Views.BoardGroupPage"
+             Title="{Binding Title}"
+             BackgroundColor="White">
+
+    <d:ContentPage.BindingContext>
+        <vm:BoardGroupViewModel/>
+    </d:ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding Path=AddPostClicked}"/>
+    </ContentPage.ToolbarItems>
+
+
+    <StackLayout>
+        <ListView x:Name="GroupsListView" 
+                  ItemsSource="{Binding Posts}" 
+                  VerticalOptions="FillAndExpand"
+                  HasUnevenRows="true"
+                  RefreshCommand="{Binding GetPost}"
+                  IsPullToRefreshEnabled="true"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  CachingStrategy="RecycleElement"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout BackgroundColor="White">
+                            <FlexLayout HorizontalOptions="Center"
+                                                Direction="Column">
+                                <Label Text="{Binding User}" 
+                                               d:Text="{Binding .}"
+                                               LineBreakMode="NoWrap"
+                                               HorizontalTextAlignment="Start"
+                                               FontFamily=""
+                                               FontAttributes="Italic"
+                                               BackgroundColor="White"
+                                               Style="{DynamicResource ListItemTextStyle}" 
+                                               FontSize="14"/>
+                                <StackLayout>
+                                    <Label Text="{Binding Title}" 
+                                                   d:Text="{Binding .}"
+                                                   TextColor="#724F7B"
+                                                   BackgroundColor="White"
+                                                   HorizontalTextAlignment="Start"
+                                                   LineBreakMode="WordWrap"
+                                                   Style="{DynamicResource ListItemTextStyle}" 
+                                                   FontSize="24"/>
+                                </StackLayout>
+                                <Label Text="{Binding Content}" 
+                                               d:Text="{Binding .}"
+                                               HorizontalTextAlignment="Start"
+                                               FlowDirection="MatchParent"
+                                               Style="{DynamicResource ListItemTextStyle}" 
+                                               LineBreakMode="WordWrap"
+                                               BackgroundColor="White"
+                                               FontSize="18"/>
+                            </FlexLayout>
+                            <BoxView  
+                               HeightRequest="3"
+                               Color="#B59ABB"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

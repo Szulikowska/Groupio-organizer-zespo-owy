@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Projekt.App">
+    <Application.Resources>
+        <DataTemplate x:Key="GroupSearchTemplate">
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.20*" />
+                    <ColumnDefinition Width="0.80*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1" 
+                       Text="{Binding Name}" 
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+                <Image Source="plus.png"                       
+                       Aspect="AspectFill"
+                       HeightRequest="40" 
+                       WidthRequest="40" />
+            </Grid>
+        </DataTemplate>
+    </Application.Resources>
+</Application>

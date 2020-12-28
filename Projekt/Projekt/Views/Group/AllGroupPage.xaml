@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Projekt.Views.AllGroupPage"
+             xmlns:con="clr-namespace:Projekt.Converters"
+             xmlns:vm="clr-namespace:Projekt.ViewModels"
+             xmlns:controls="clr-namespace:Projekt.Controls"
+             xmlns:app="clr-namespace:Projekt"
+             Title="{Binding Title}"
+             BackgroundColor="White"
+             Shell.BackgroundColor="#724F7B">
+
+    <d:ContentPage.BindingContext>
+        <vm:AllGroupViewModel/>
+    </d:ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="plus.png" Clicked="AddGroup_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <con:IntegerToColorConverter x:Key="IntToCol" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Shell.SearchHandler>
+        <controls:GroupSearchHandler Gr="{x:Static app:App.AllGroups}" 
+                                     Placeholder="Enter search term"
+                                     ShowsResults="true"
+                                     ItemTemplate="{StaticResource GroupSearchTemplate}"/>
+    </Shell.SearchHandler>
+    <!--<Shell.SearchHandler>
+        <SearchHandler ItemsSource="{Binding AllGroups}"
+                       IsSearchEnabled="True"
+                       ShowsResults="True"
+                       Placeholder="Szukaj"
+                       ItemTemplate="{StaticResource GroupSearchTemplate}"
+                       />
+    </Shell.SearchHandler>-->
+    <StackLayout>
+        <ListView x:Name="GroupsListView" 
+                  ItemsSource="{Binding UserGroups}" 
+                  VerticalOptions="FillAndExpand"
+                  HasUnevenRows="true"
+                  RefreshCommand="{Binding GetGroups}"
+                  IsPullToRefreshEnabled="true"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  CachingStrategy="RecycleElement"
+                  ItemSelected="GroupsListView_ItemSelected"
+                  SelectionMode="Single"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="5" 
+                                     BackgroundColor="{Binding Col, Converter={StaticResource IntToCol}}">
+                            <Grid BackgroundColor="Transparent">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="5*"/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid   Grid.Column="1"
+                                        Grid.Row="0"
+                                        Grid.ColumnSpan="2">
+                                    <Label Text="{Binding Name}" 
+                                        d:Text="{Binding .}"
+                                        LineBreakMode="NoWrap" 
+                                        Style="{DynamicResource ListItemTextStyle}" 
+                                        FontSize="24"/>
+                                </Grid>
+
+                                <Grid   Grid.Column="1"
+                                        Grid.ColumnSpan="2"
+                                        Grid.Row="1">
+                                    <Label Text="{Binding Description}" 
+                                        d:Text="{Binding .}"
+                                        LineBreakMode="NoWrap" 
+                                        Style="{DynamicResource ListItemTextStyle}" 
+                                        FontSize="16"/>
+                                </Grid>
+                                <ImageButton Source="minus.png"
+                                             BackgroundColor="Transparent"
+                                             Grid.Column="3"
+                                             Grid.RowSpan="3"
+                                             Clicked="DeleteFromGroup"/>
+                                             <!-- Command="{Binding Path=RemoveThisGroup}   -->
+                            </Grid>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

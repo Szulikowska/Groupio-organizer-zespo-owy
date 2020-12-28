@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Projekt.ViewModels"
+             mc:Ignorable="d"
+             Title="{Binding Path=Group.Name}"
+             Shell.BackgroundColor="#724F7B"
+             x:Class="Projekt.Views.GroupPage">
+
+    <d:ContentPage.BindingContext>
+        <vm:GroupViewModel/>
+    </d:ContentPage.BindingContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Button Text="Tablica"      Clicked="Board_Clicked"
+                Grid.Row="0"
+                    BackgroundColor="#D4BDD9"/>
+            <Button Text="Kalendarz"    Clicked="Calendar_Clicked"
+                Grid.Row="1"
+                    BackgroundColor="White"/>
+            <Button Text="Członkowie"   Clicked="Members_Clicked"
+                Grid.Row="2"
+                    BackgroundColor="#D4BDD9"/>
+            <Button Text="Dane Grupy"  Clicked="Date_Clicked"
+                Grid.Row="3"
+                    BackgroundColor="White"/>
+            <ListView ItemsSource="{Binding Gr}"
+                      Grid.Row="5">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding School}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

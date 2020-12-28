@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       mc:Ignorable="d"
+       xmlns:local="clr-namespace:Projekt.Views"
+       xmlns:con="clr-namespace:Projekt.Converters"
+       FlyoutHeaderBehavior="CollapseOnScroll"
+       FlyoutBackgroundColor="White"
+       Shell.BackgroundColor="#724F7B"
+       Title="Projekt"
+       x:Class="Projekt.AppShell">
+
+    <!-- 
+        Styles and Resources 
+    -->
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackButtonPressed}"/>
+    </Shell.BackButtonBehavior>
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Color x:Key="NavigationPrimary">#724F7B</Color>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style x:Key="LogOutShell" TargetType="Element" BasedOn="{StaticResource BaseStyle}">
+                <Setter Property="Shell.ForegroundColor" Value="#039BE6"/>
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+    <Shell.FlyoutHeader>
+        <ContentView HeightRequest="100">
+            <Grid BackgroundColor="Orchid">
+                <Label Text=""/>
+            </Grid>
+        </ContentView>
+    </Shell.FlyoutHeader>
+    <!-- Your Pages -->
+
+    <FlyoutItem Title="Strona główna" Route="main">
+        <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Grupy" Route="groups">
+        <ShellContent ContentTemplate="{DataTemplate local:AllGroupPage}"/>
+    </FlyoutItem>
+    <MenuItem Text="Wyloguj" Clicked="LogOut">
+    </MenuItem>
+</Shell>

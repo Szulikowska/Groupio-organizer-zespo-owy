@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Projekt.Views.ItemsPage"
+             xmlns:con="clr-namespace:Projekt.Converters"
+             Title="{Binding Title}"
+             x:Name="BrowseItemsPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <con:IntegerToTextModeConverter x:Key="IntToTextMode" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <Label Text="Powiadomienia z grup"
+               TextColor="#724F7B"
+               FontSize="30"/>
+        <BoxView HeightRequest="3"
+                 Color="#724F7B"/>
+        <ListView x:Name="GroupsListView" 
+                  ItemsSource="{Binding Posts3}" 
+                  VerticalOptions="FillAndExpand"
+                  HasUnevenRows="true"
+                  RefreshCommand="{Binding LoadPosts}"
+                  RefreshControlColor="Purple"
+                  IsPullToRefreshEnabled="true"
+                  IsRefreshing="{Binding IsBusy}"
+                  CachingStrategy="RecycleElement"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout BackgroundColor="White">
+                            <FlexLayout HorizontalOptions="Center"
+                                                Direction="Column">
+                                        <Label Text="{Binding Name}" 
+                                               d:Text="{Binding .}"
+                                               TextColor="#724F7B"
+                                               LineBreakMode="NoWrap" 
+                                               HorizontalTextAlignment="Start"
+                                               LineHeight="5"
+                                               BackgroundColor="White"
+                                               Style="{DynamicResource ListItemTextStyle}" 
+                                               FontSize="24"/>
+                                        <Label Text="{Binding Posts.User}" 
+                                               d:Text="{Binding .}"
+                                               LineBreakMode="NoWrap"
+                                               HorizontalTextAlignment="Start"
+                                               FontFamily=""
+                                               FontAttributes="Italic"
+                                               BackgroundColor="White"
+                                               Style="{DynamicResource ListItemTextStyle}" 
+                                               FontSize="14"/>
+                                        <StackLayout>
+                                            <Label Text="{Binding Posts.Title}" 
+                                                   d:Text="{Binding .}"
+                                                   TextColor="#724F7B"
+                                                   BackgroundColor="White"
+                                                   HorizontalTextAlignment="Start"
+                                                   LineBreakMode="WordWrap"
+                                                   Style="{DynamicResource ListItemTextStyle}" 
+                                                   FontSize="24"/>
+                                        </StackLayout>
+                                        <Label Text="{Binding Posts.Content}" 
+                                               d:Text="{Binding .}"
+                                               HorizontalTextAlignment="Start"
+                                               FlowDirection="MatchParent"
+                                               Style="{DynamicResource ListItemTextStyle}" 
+                                               LineBreakMode="WordWrap"
+                                               BackgroundColor="White"
+                                               FontSize="18"/>
+                                    </FlexLayout>
+                                    <BoxView  
+                               HeightRequest="3"
+                               Color="#B59ABB"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

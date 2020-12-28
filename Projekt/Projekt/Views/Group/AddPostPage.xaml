@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Projekt.ViewModels"
+             mc:Ignorable="d"
+             BackgroundColor="White"
+             x:Class="Projekt.Views.AddPostPage">
+
+    <d:ContentPage.BindingContext>
+        <vm:AddPostViewModel/>
+    </d:ContentPage.BindingContext>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Stwórz post"
+                     Command="{Binding AddPostClicked}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="9*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ScrollView BackgroundColor="#D4BDD9"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Text="Tytuł"
+                           Grid.Row="2"
+                           Grid.Column="1"/>
+                        <Frame  IsClippedToBounds="true" 
+                                Padding="1" 
+                                BorderColor="Gray"
+                                CornerRadius="25"
+                                BackgroundColor="White"
+                                Grid.Row="3"
+                                Grid.Column="1" 
+                               Grid.ColumnSpan="1">
+                            <Entry Text="{Binding Path=PostTitle, Mode=OneWayToSource}"
+                                   BackgroundColor="Transparent"
+                                   Grid.Row="3"
+                                   Grid.Column="1" 
+                                   Grid.ColumnSpan="1"/>
+                        </Frame>
+                        <Label Text="Treść"
+                               Grid.Row="5"
+                               Grid.Column="1"
+                               Grid.ColumnSpan="1"/>
+                        
+                        <Frame IsClippedToBounds="true" 
+                               Padding="1" 
+                               BorderColor="Gray"
+                               CornerRadius="25"
+                               BackgroundColor="White"
+                               Grid.Row="6"
+                               Grid.RowSpan="2"
+                               Grid.Column="1" 
+                               Grid.ColumnSpan="1">
+                            <Editor Text="{Binding Path=Content, Mode=OneWayToSource}"
+                                   BackgroundColor="Transparent"
+                                   Grid.Row="6"
+                                   Grid.RowSpan="2"
+                                   
+                                   Grid.Column="1" 
+                                   Grid.ColumnSpan="1"/>
+                        </Frame>
+                    </Grid>
+
+                </ScrollView>
+                <Frame IsClippedToBounds="true" 
+                               Padding="1" 
+                               BorderColor="Gray"
+                               CornerRadius="25"
+                               BackgroundColor="White"
+                               Grid.Row="4"
+                               Grid.Column="2" 
+                               Grid.ColumnSpan="1">
+                    <Button Text="Zatwierdź"
+                            BackgroundColor="#724F7B"
+                            Grid.Row="4"
+                            Grid.Column="2" 
+                            Grid.ColumnSpan="1"
+                            Command="{Binding AddPostClicked}"/>
+                </Frame>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
